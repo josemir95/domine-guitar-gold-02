@@ -1,76 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compra Confirmada - Domine a Guitarra</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obrigado pela sua compra!</title>
 
+  <!-- Estilo básico para página limpa e profissional -->
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f9f9f9;
-      color: #222;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
+      color: #333;
     }
 
     .container {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.08);
-      max-width: 600px;
-      width: 100%;
+      max-width: 700px;
+      margin: 100px auto;
+      background: #fff;
       padding: 40px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
       text-align: center;
     }
 
     h1 {
-      color: #e67e22;
-      font-size: 28px;
+      color: #e66100;
+      font-size: 2rem;
       margin-bottom: 20px;
     }
 
     p {
-      font-size: 16px;
+      font-size: 1.1rem;
       line-height: 1.6;
-      margin-bottom: 15px;
+    }
+
+    .emoji {
+      font-size: 1.5rem;
     }
 
     .highlight {
-      font-weight: 600;
-      color: #333;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 25px;
-      background: #e67e22;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 6px;
-      text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .btn:hover {
-      background: #cf711f;
-    }
-
-    .footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #888;
     }
   </style>
 
-  <!-- Pixel do Meta Ads -->
+  <!-- Meta Pixel (com evento garantido após DOM carregado) -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -80,32 +55,31 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    
-    fbq('init', '2204437266644303');
-    fbq('track', 'Purchase');
+
+    fbq('init', '2204437266644303'); // Seu Pixel ID
+
+    document.addEventListener("DOMContentLoaded", function () {
+      fbq('track', 'Purchase');
+    });
   </script>
+
   <noscript>
     <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=2204437266644303&ev=Purchase&noscript=1"/>
+      src="https://www.facebook.com/tr?id=2204437266644303&ev=Purchase&noscript=1" />
   </noscript>
 
-  <!-- Script da UTMify -->
+  <!-- UTMify -->
   <script async defer src="https://cdn.utmify.com.br/script.js"></script>
 </head>
+
 <body>
-
   <div class="container">
-    <h1>🎸 Obrigado pela sua compra!</h1>
-    <p>Sua inscrição no <span class="highlight">Domine a Guitarra</span> foi recebida com sucesso.</p>
-    <p>Você receberá os dados de acesso no seu <strong>e-mail</strong> cadastrado <span class="highlight">(verifique o spam ou promoções também).</span></p>
-    <p>Se não receber em até 15 minutos, entre em contato conosco.</p>
-
-    <a href="mailto:musicoautodidataclass@gmail.com" class="btn">Falar com o Suporte</a>
-
-    <div class="footer">
-      © 2025 Domine a Guitarra | Todos os direitos reservados.
-    </div>
+    <div class="emoji">🎸</div>
+    <h1>Obrigado pela sua compra!</h1>
+    <p>Sua inscrição no <span class="highlight">Domine a Guitarra</span> foi processada com sucesso.</p>
+    <p>Você receberá os dados de acesso no seu <span class="highlight">e-mail</span> cadastrado.</p>
+    <p><strong>Importante:</strong> verifique também sua caixa de <span class="highlight">spam ou promoções</span>.</p>
+    <p>Qualquer dúvida, entre em contato pelo e-mail de suporte que está na página de vendas.</p>
   </div>
-
 </body>
 </html>
