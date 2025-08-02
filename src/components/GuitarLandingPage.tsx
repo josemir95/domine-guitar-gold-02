@@ -269,11 +269,11 @@ const GuitarLandingPage = () => {
             </div>
             
             {/* CTA Bônus */}
-            <div className="text-center mt-6 md:mt-8">
+            <div className="text-center mt-6 md:mt-8 px-4">
               <Button 
                 variant="hero" 
                 size="lg" 
-                className="text-base md:text-xl py-4 md:py-6 px-4 md:px-8 w-full max-w-md"
+                className="text-sm sm:text-base md:text-xl py-3 md:py-6 px-3 md:px-8 w-full max-w-lg mx-auto"
                 onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}
               >
                 🎸 Quero o Método Completo + 5 Bônus Exclusivos!
