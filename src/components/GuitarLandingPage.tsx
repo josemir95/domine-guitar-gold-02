@@ -459,10 +459,6 @@ const GuitarLandingPage = () => {
                     </div>
                     <div className="flex items-center gap-2 md:gap-3">
                       <Check className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
-                      <span className="text-sm md:text-base">Comunidade exclusiva de alunos</span>
-                    </div>
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <Check className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
                       <span className="text-sm md:text-base">5 Bônus Exclusivos (valor R$ 149,50)</span>
                     </div>
                     <div className="flex items-center gap-2 md:gap-3">
@@ -483,7 +479,7 @@ const GuitarLandingPage = () => {
                       R$ 24,90
                     </p>
                     <p className="text-xs md:text-sm text-muted-foreground">
-                      ou 3x de R$ 8,30
+                      ou 5x de R$ 5,85
                     </p>
                   </div>
                   
