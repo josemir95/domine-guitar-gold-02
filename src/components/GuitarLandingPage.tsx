@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Check, Star, Gift, ArrowDown } from "lucide-react";
 import heroGuitar from "@/assets/hero-guitar.jpg";
 import bonusChecklist from "@/assets/bonus-checklist.jpg";
@@ -59,14 +60,44 @@ const GuitarLandingPage = () => {
     text: "Método claro e objetivo. Saí do zero para tocar com banda em 6 meses!",
     rating: 5
   }];
+
+  const faqItems = [
+    {
+      question: "Preciso ter conhecimento prévio de música?",
+      answer: "Não! O método foi desenvolvido para iniciantes completos. Começamos do absoluto zero e você vai evoluindo passo a passo até conseguir improvisar e tocar com desenvoltura."
+    },
+    {
+      question: "Quanto tempo por dia preciso praticar?",
+      answer: "Recomendamos apenas 20-30 minutos por dia. O método é focado em qualidade, não quantidade. Muitos alunos veem resultados já na primeira semana com essa dedicação."
+    },
+    {
+      question: "Funciona para qualquer idade?",
+      answer: "Sim! Temos alunos de 15 a 70 anos. A música não tem idade e nosso método se adapta ao seu ritmo de aprendizado, seja você jovem ou mais experiente."
+    },
+    {
+      question: "E se eu não conseguir acompanhar?",
+      answer: "O acesso é vitalício! Você pode assistir quantas vezes quiser, no seu ritmo. Além disso, temos uma comunidade de apoio e suporte direto comigo para tirar suas dúvidas."
+    },
+    {
+      question: "Preciso comprar uma guitarra cara?",
+      answer: "Não! Você pode começar com qualquer guitarra, mesmo uma mais simples. O importante é a técnica e o método, não o equipamento. Conforme evolui, naturalmente vai querer investir em melhores instrumentos."
+    },
+    {
+      question: "Como funciona a garantia?",
+      answer: "Simples: você tem 7 dias para testar tudo. Se não ficar satisfeito por qualquer motivo, devolvemos 100% do seu dinheiro, sem perguntas e sem burocracia."
+    }
+  ];
   return <div className="min-h-screen bg-gradient-hero text-foreground relative">
       {/* Background Guitar Image - Left Side */}
-      <div className="fixed left-0 top-0 w-1/2 md:w-1/2 sm:w-full h-full bg-cover bg-center md:bg-right bg-no-repeat opacity-10 md:opacity-15 z-0" style={{
+      <div className="fixed left-0 top-0 w-1/2 md:w-1/2 sm:w-full h-full bg-cover bg-center md:bg-right bg-no-repeat opacity-5 md:opacity-8 z-0" style={{
       backgroundImage: `url(${heroGuitar})`
     }}></div>
       
+      {/* Semi-transparent overlay for better text contrast */}
+      <div className="fixed inset-0 bg-background/30 z-5"></div>
+      
       {/* Content Overlay */}
-      <div className="relative z-10">
+      <div className="relative z-20">
       {/* Header */}
       <header className="container mx-auto px-4 py-4 md:py-6">
         <div className="flex justify-center items-center">
@@ -78,39 +109,39 @@ const GuitarLandingPage = () => {
       <section className="container mx-auto px-4 py-8 md:py-16">
         <div className="max-w-4xl mx-auto text-center">
           <div className="space-y-6 md:space-y-8">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg">
               <span className="bg-gradient-gold bg-clip-text text-transparent">
-                Domine a Guitarra
+                Domine a Guitarra do Zero
               </span>
               <br />
-              <span className="text-foreground">
-                em Tempo Recorde
+              <span className="text-white font-extrabold drop-shadow-md">
+                em 6 Semanas Usando Menos Teoria
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground px-2">
+            <p className="text-lg md:text-xl text-white/90 px-2 drop-shadow-md font-medium">
               Descubra o método que já transformou mais de 500 alunos, do zero à performance profissional — com técnicas modernas e liberdade para improvisar no seu próprio estilo.
             </p>
             <div className="flex flex-col items-center gap-3">
-              <Button variant="hero" size="lg" onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')} className="text-lg md:text-xl py-4 md:py-6 px-6 md:px-8 w-full max-w-md">
-                Quero Dominar a Guitarra!
+              <Button variant="hero" size="lg" onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')} className="text-lg md:text-xl py-4 md:py-6 px-6 md:px-8 w-full max-w-md transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-gold-intense">
+                🎸 Quero Dominar a Guitarra!
               </Button>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-white/80 drop-shadow">
                 Garantia incondicional de 7 dias — teste sem risco!
               </p>
             </div>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 pt-4">
               <div className="text-center">
-                <p className="text-xl md:text-2xl font-bold text-primary">500+</p>
-                <p className="text-xs md:text-sm text-muted-foreground">Alunos Transformados</p>
+                <p className="text-xl md:text-2xl font-bold text-primary drop-shadow">500+</p>
+                <p className="text-xs md:text-sm text-white/80 drop-shadow">Alunos Transformados</p>
               </div>
               <div className="text-center">
-                <p className="text-xl md:text-2xl font-bold text-primary">4.9★</p>
-                <p className="text-xs md:text-sm text-muted-foreground">Avaliação Média</p>
+                <p className="text-xl md:text-2xl font-bold text-primary drop-shadow">4.9★</p>
+                <p className="text-xs md:text-sm text-white/80 drop-shadow">Avaliação Média</p>
               </div>
               <div className="text-center">
-                <p className="text-xl md:text-2xl font-bold text-primary">7 dias</p>
-                <p className="text-xs md:text-sm text-muted-foreground">Garantia</p>
+                <p className="text-xl md:text-2xl font-bold text-primary drop-shadow">7 dias</p>
+                <p className="text-xs md:text-sm text-white/80 drop-shadow">Garantia</p>
               </div>
             </div>
           </div>
@@ -121,38 +152,38 @@ const GuitarLandingPage = () => {
       <section className="bg-secondary py-8 md:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground px-2">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-lg px-2">
               Cansado de Tocar Sempre as Mesmas Coisas?
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               <div className="space-y-4">
                 <img src={iconFrustration} alt="Frustração Musical" className="w-12 h-12 md:w-16 md:h-16 mx-auto" />
-                <h4 className="text-lg md:text-xl font-semibold">Você Sente que Está Travado?</h4>
-                <p className="text-muted-foreground text-sm md:text-base">
+                <h4 className="text-lg md:text-xl font-semibold text-white drop-shadow">Você Sente que Está Travado?</h4>
+                <p className="text-white/80 text-sm md:text-base drop-shadow">
                   Meses praticando e ainda preso aos mesmos acordes?
                 </p>
               </div>
               <div className="space-y-4">
                 <img src={iconRepetition} alt="Repetição Sem Fim" className="w-12 h-12 md:w-16 md:h-16 mx-auto" />
-                <h4 className="text-lg md:text-xl font-semibold">Tudo Soa Igual?</h4>
-                <p className="text-muted-foreground text-sm md:text-base">
+                <h4 className="text-lg md:text-xl font-semibold text-white drop-shadow">Tudo Soa Igual?</h4>
+                <p className="text-white/80 text-sm md:text-base drop-shadow">
                   Toca as mesmas músicas, sem conseguir criar nada novo?
                 </p>
               </div>
               <div className="space-y-4">
                 <img src={iconTimeLost} alt="Tempo Perdido" className="w-12 h-12 md:w-16 md:h-16 mx-auto" />
-                <h4 className="text-lg md:text-xl font-semibold">Estuda, Estuda... e Nada Muda?</h4>
-                <p className="text-muted-foreground text-sm md:text-base">
+                <h4 className="text-lg md:text-xl font-semibold text-white drop-shadow">Estuda, Estuda... e Nada Muda?</h4>
+                <p className="text-white/80 text-sm md:text-base drop-shadow">
                   Anos praticando, mas sem resultados reais?
                 </p>
               </div>
             </div>
             
             {/* CTA */}
-            <div className="text-center mt-8 md:mt-12 p-4 md:p-6 bg-gradient-dark rounded-lg border border-primary shadow-gold mx-2">
-              <p className="text-lg md:text-xl font-semibold text-foreground">
+            <div className="text-center mt-8 md:mt-12 p-4 md:p-6 bg-gradient-dark rounded-lg border border-primary shadow-gold-intense mx-2 transform hover:scale-105 transition-all duration-300">
+              <p className="text-lg md:text-xl font-semibold text-white drop-shadow">
                 Se você se identificou com alguma dessas situações... 
-                <span className="bg-gradient-gold bg-clip-text text-transparent block md:inline">
+                <span className="bg-gradient-gold bg-clip-text text-transparent block md:inline font-bold">
                   o método abaixo foi feito para você.
                 </span>
               </p>
@@ -201,9 +232,9 @@ const GuitarLandingPage = () => {
             </div>
             
             {/* Mini CTA */}
-            <div className="text-center mt-8 md:mt-12 p-4 md:p-6 bg-gradient-dark rounded-lg border border-primary shadow-gold mx-2">
-              <p className="text-lg md:text-xl font-semibold text-foreground">
-                <span className="bg-gradient-gold bg-clip-text text-transparent">
+            <div className="text-center mt-8 md:mt-12 p-4 md:p-6 bg-gradient-dark rounded-lg border border-primary shadow-gold-intense mx-2 transform hover:scale-105 transition-all duration-300">
+              <p className="text-lg md:text-xl font-semibold text-white drop-shadow">
+                <span className="bg-gradient-gold bg-clip-text text-transparent font-bold">
                   E tudo isso está disponível de forma simples, direta e com acesso imediato...
                 </span>
               </p>
@@ -273,13 +304,13 @@ const GuitarLandingPage = () => {
               <Button 
                 variant="hero" 
                 size="lg" 
-                className="text-sm sm:text-base md:text-xl py-4 sm:py-5 md:py-6 px-3 md:px-8 w-full max-w-lg mx-auto h-auto min-h-[60px] sm:min-h-[70px] md:min-h-[80px] leading-tight"
+                className="text-sm sm:text-base md:text-xl py-4 sm:py-5 md:py-6 px-3 md:px-8 w-full max-w-lg mx-auto h-auto min-h-[60px] sm:min-h-[70px] md:min-h-[80px] leading-tight transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-gold-intense"
                 onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}
               >
                 <span className="block sm:inline">🎸 Quero o Método Completo</span>
                 <span className="block sm:inline sm:ml-1">+ 5 Bônus Exclusivos!</span>
               </Button>
-              <p className="text-xs md:text-sm text-muted-foreground mt-2">
+              <p className="text-xs md:text-sm text-white/80 drop-shadow mt-2">
                 Acesso imediato • Garantia de 7 dias
               </p>
             </div>
@@ -455,14 +486,14 @@ const GuitarLandingPage = () => {
                   </div>
                   
                   <div className="space-y-3 md:space-y-4">
-                    <Button 
-                      variant="cta" 
-                      size="lg" 
-                      className="w-full text-base md:text-xl py-4 md:py-6"
-                      onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}
-                    >
-                      Quero Começar Minha Transformação
-                    </Button>
+                  <Button 
+                    variant="cta" 
+                    size="lg" 
+                    className="w-full text-base md:text-xl py-4 md:py-6 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-gold-intense"
+                    onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}
+                  >
+                    🚀 Quero Começar Minha Transformação
+                  </Button>
                     <p className="text-xs text-muted-foreground">
                       Pagamento 100% seguro • Acesso imediato
                     </p>
@@ -479,6 +510,36 @@ const GuitarLandingPage = () => {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-8 md:py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
+            <div className="text-center space-y-3 md:space-y-4">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground px-2">
+                <span className="bg-gradient-gold bg-clip-text text-transparent">
+                  Perguntas Frequentes
+                </span>
+              </h3>
+              <p className="text-lg md:text-xl text-muted-foreground px-2">
+                Tire suas dúvidas mais comuns sobre o método
+              </p>
+            </div>
+            <Accordion type="single" collapsible className="w-full">
+              {faqItems.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-border">
+                  <AccordionTrigger className="text-left text-sm md:text-base font-semibold hover:text-primary">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm md:text-base text-muted-foreground">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>
