@@ -273,10 +273,11 @@ const GuitarLandingPage = () => {
               <Button 
                 variant="hero" 
                 size="lg" 
-                className="text-sm sm:text-base md:text-xl py-3 md:py-6 px-3 md:px-8 w-full max-w-lg mx-auto"
+                className="text-sm sm:text-base md:text-xl py-4 sm:py-5 md:py-6 px-3 md:px-8 w-full max-w-lg mx-auto h-auto min-h-[60px] sm:min-h-[70px] md:min-h-[80px] leading-tight"
                 onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}
               >
-                🎸 Quero o Método Completo + 5 Bônus Exclusivos!
+                <span className="block sm:inline">🎸 Quero o Método Completo</span>
+                <span className="block sm:inline sm:ml-1">+ 5 Bônus Exclusivos!</span>
               </Button>
               <p className="text-xs md:text-sm text-muted-foreground mt-2">
                 Acesso imediato • Garantia de 7 dias
