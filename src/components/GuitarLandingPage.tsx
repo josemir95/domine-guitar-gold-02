@@ -89,7 +89,7 @@ const GuitarLandingPage = () => {
   ];
   return <div className="min-h-screen bg-gradient-hero text-foreground relative">
       {/* Background Guitar Image - Left Side */}
-      <div className="fixed left-0 top-0 w-1/2 md:w-1/2 sm:w-full h-full bg-cover bg-center md:bg-right bg-no-repeat opacity-5 md:opacity-8 z-0" style={{
+      <div className="fixed left-0 top-0 w-1/2 md:w-1/2 sm:w-full h-full bg-cover bg-center md:bg-right bg-no-repeat opacity-20 md:opacity-25 z-0" style={{
       backgroundImage: `url(${heroGuitar})`
     }}></div>
       
