@@ -60,33 +60,25 @@ const GuitarLandingPage = () => {
     text: "Método claro e objetivo. Saí do zero para tocar com banda em 6 meses!",
     rating: 5
   }];
-
-  const faqItems = [
-    {
-      question: "Preciso ter conhecimento prévio de música?",
-      answer: "Não! O método foi desenvolvido para iniciantes completos. Começamos do absoluto zero e você vai evoluindo passo a passo até conseguir improvisar e tocar com desenvoltura."
-    },
-    {
-      question: "Quanto tempo por dia preciso praticar?",
-      answer: "Recomendamos apenas 20-30 minutos por dia. O método é focado em qualidade, não quantidade. Muitos alunos veem resultados já na primeira semana com essa dedicação."
-    },
-    {
-      question: "Funciona para qualquer idade?",
-      answer: "Sim! Temos alunos de 15 a 70 anos. A música não tem idade e nosso método se adapta ao seu ritmo de aprendizado, seja você jovem ou mais experiente."
-    },
-    {
-      question: "E se eu não conseguir acompanhar?",
-      answer: "O acesso é vitalício! Você pode assistir quantas vezes quiser, no seu ritmo. Além disso, temos uma comunidade de apoio e suporte direto comigo para tirar suas dúvidas."
-    },
-    {
-      question: "Preciso comprar uma guitarra cara?",
-      answer: "Não! Você pode começar com qualquer guitarra, mesmo uma mais simples. O importante é a técnica e o método, não o equipamento. Conforme evolui, naturalmente vai querer investir em melhores instrumentos."
-    },
-    {
-      question: "Como funciona a garantia?",
-      answer: "Simples: você tem 7 dias para testar tudo. Se não ficar satisfeito por qualquer motivo, devolvemos 100% do seu dinheiro, sem perguntas e sem burocracia."
-    }
-  ];
+  const faqItems = [{
+    question: "Preciso ter conhecimento prévio de música?",
+    answer: "Não! O método foi desenvolvido para iniciantes completos. Começamos do absoluto zero e você vai evoluindo passo a passo até conseguir improvisar e tocar com desenvoltura."
+  }, {
+    question: "Quanto tempo por dia preciso praticar?",
+    answer: "Recomendamos apenas 20-30 minutos por dia. O método é focado em qualidade, não quantidade. Muitos alunos veem resultados já na primeira semana com essa dedicação."
+  }, {
+    question: "Funciona para qualquer idade?",
+    answer: "Sim! Temos alunos de 15 a 70 anos. A música não tem idade e nosso método se adapta ao seu ritmo de aprendizado, seja você jovem ou mais experiente."
+  }, {
+    question: "E se eu não conseguir acompanhar?",
+    answer: "O acesso é vitalício! Você pode assistir quantas vezes quiser, no seu ritmo. Além disso, temos uma comunidade de apoio e suporte direto comigo para tirar suas dúvidas."
+  }, {
+    question: "Preciso comprar uma guitarra cara?",
+    answer: "Não! Você pode começar com qualquer guitarra, mesmo uma mais simples. O importante é a técnica e o método, não o equipamento. Conforme evolui, naturalmente vai querer investir em melhores instrumentos."
+  }, {
+    question: "Como funciona a garantia?",
+    answer: "Simples: você tem 7 dias para testar tudo. Se não ficar satisfeito por qualquer motivo, devolvemos 100% do seu dinheiro, sem perguntas e sem burocracia."
+  }];
   return <div className="min-h-screen bg-gradient-hero text-foreground relative">
       {/* Background Guitar Image - Left Side */}
       <div className="fixed left-0 top-0 w-full md:w-1/2 h-full bg-cover bg-center md:bg-right bg-no-repeat opacity-20 md:opacity-25 z-0" style={{
@@ -301,12 +293,7 @@ const GuitarLandingPage = () => {
             
             {/* CTA Bônus */}
             <div className="text-center mt-6 md:mt-8 px-4">
-              <Button 
-                variant="hero" 
-                size="lg" 
-                className="text-sm sm:text-base md:text-xl py-4 sm:py-5 md:py-6 px-3 md:px-8 w-full max-w-lg mx-auto h-auto min-h-[60px] sm:min-h-[70px] md:min-h-[80px] leading-tight transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-gold-intense"
-                onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}
-              >
+              <Button variant="hero" size="lg" className="text-sm sm:text-base md:text-xl py-4 sm:py-5 md:py-6 px-3 md:px-8 w-full max-w-lg mx-auto h-auto min-h-[60px] sm:min-h-[70px] md:min-h-[80px] leading-tight transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-gold-intense" onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}>
                 <div className="flex flex-col items-center">
                   <span className="block">🎸 Quero o Método Completo</span>
                   <span className="block text-sm sm:text-sm md:text-lg">+ 5 Bônus Exclusivos!</span>
@@ -382,14 +369,15 @@ const GuitarLandingPage = () => {
                   </ul>
                 </div>
               </div>
-              <button 
-                className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 p-4 md:p-6 rounded-lg mb-4 md:mb-6 hover:from-yellow-500 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 cursor-pointer"
-                onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}
-              >
-                <p className="text-lg sm:text-xl md:text-2xl font-bold mb-1 md:mb-2" style={{color: '#ffffff'}}>
+              <button className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 p-4 md:p-6 rounded-lg mb-4 md:mb-6 hover:from-yellow-500 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 cursor-pointer" onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}>
+                <p className="text-lg sm:text-xl md:text-2xl font-bold mb-1 md:mb-2" style={{
+                  color: '#ffffff'
+                }}>
                   🔥 ÚLTIMA CHANCE com 92% de Desconto! 🔥
                 </p>
-                <p className="text-sm sm:text-base md:text-lg" style={{color: '#ffffff'}}>
+                <p className="text-sm sm:text-base md:text-lg" style={{
+                  color: '#ffffff'
+                }}>
                   Esta oferta expira em breve e o preço volta para R$ 299
                 </p>
               </button>
@@ -447,7 +435,7 @@ const GuitarLandingPage = () => {
                   <div className="space-y-2 md:space-y-3">
                     <div className="flex items-center gap-2 md:gap-3">
                       <Check className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
-                      <span className="text-sm md:text-base">Curso Completo Domine a Guitarra</span>
+                      <span className="text-sm md:text-base">Guia Completo Domine a Guitarra</span>
                     </div>
                     <div className="flex items-center gap-2 md:gap-3">
                       <Check className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
@@ -484,12 +472,7 @@ const GuitarLandingPage = () => {
                   </div>
                   
                   <div className="space-y-3 md:space-y-4">
-                  <Button 
-                    variant="cta" 
-                    size="lg" 
-                    className="w-full text-base md:text-xl py-4 md:py-6 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-gold-intense"
-                    onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}
-                  >
+                  <Button variant="cta" size="lg" className="w-full text-base md:text-xl py-4 md:py-6 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-gold-intense" onClick={() => window.open('https://pay.cakto.com.br/tkgc23h_500047', '_blank')}>
                     🚀 Quero Começar Minha Transformação
                   </Button>
                     <p className="text-xs text-muted-foreground">
@@ -527,16 +510,14 @@ const GuitarLandingPage = () => {
               </p>
             </div>
             <Accordion type="single" collapsible className="w-full">
-              {faqItems.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-border">
+              {faqItems.map((item, index) => <AccordionItem key={index} value={`item-${index}`} className="border-border">
                   <AccordionTrigger className="text-left text-sm md:text-base font-semibold hover:text-primary">
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-sm md:text-base text-muted-foreground">
                     {item.answer}
                   </AccordionContent>
-                </AccordionItem>
-              ))}
+                </AccordionItem>)}
             </Accordion>
           </div>
         </div>
