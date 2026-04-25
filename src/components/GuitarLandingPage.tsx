@@ -464,10 +464,10 @@ const GuitarLandingPage = () => {
                       De R$ 299
                     </p>
                     <p className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-gold bg-clip-text text-transparent">
-                      R$ 24,90
+                      R$ 19,90
                     </p>
                     <p className="text-xs md:text-sm text-muted-foreground">
-                      ou 5x de R$ 5,85
+                      ou 5x de R$ 3,98
                     </p>
                   </div>
                   
