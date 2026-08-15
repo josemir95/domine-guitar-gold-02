@@ -424,31 +424,6 @@ const GuitarLandingPage = () => {
           </div>
         </section>
 
-        {/* ===== VÍDEO DE VENDAS (NOVO) ===== */}
-        <section className="py-8 md:py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center space-y-6 md:space-y-8">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold px-2">
-                Veja Como o Método{" "}
-                <span className="bg-gradient-gold bg-clip-text text-transparent">Funciona na Prática</span>
-              </h3>
-              {/* Substitua este bloco pelo seu iframe do YouTube:
-                  <iframe className="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/SEU_VIDEO_ID"
-                    title="Apresentação do Método" frameBorder="0" allowFullScreen />
-              */}
-              <div className="relative rounded-xl overflow-hidden border-2 border-primary shadow-gold-intense bg-black aspect-video flex items-center justify-center cursor-pointer group" onClick={goToCheckout}>
-                <div className="text-center space-y-4 p-8">
-                  <div className="w-20 h-20 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mx-auto group-hover:bg-primary/30 transition-colors">
-                    <div className="w-0 h-0 border-t-[14px] border-t-transparent border-l-[24px] border-l-primary border-b-[14px] border-b-transparent ml-2" />
-                  </div>
-                  <p className="text-white/80 text-base font-medium">Assista ao vídeo de apresentação do método</p>
-                  <p className="text-xs text-muted-foreground italic">[Insira aqui seu vídeo de vendas — troque este bloco pelo seu iframe do YouTube]</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ===== INSTRUTOR ===== */}
         <section className="bg-secondary py-8 md:py-16">
           <div className="container mx-auto px-4">
