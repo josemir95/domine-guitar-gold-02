@@ -192,7 +192,7 @@ const GuitarLandingPage = () => {
 
       {/* Background Guitar Image */}
       <div
-        className="fixed left-0 top-0 w-full md:w-1/2 h-full bg-cover bg-[center_top] md:bg-right bg-no-repeat opacity-40 md:opacity-25 z-0"
+        className="fixed left-0 top-0 w-full md:w-1/2 h-full bg-cover bg-right-top md:bg-right bg-no-repeat opacity-40 md:opacity-25 z-0"
         style={{ backgroundImage: `url(${heroGuitar})` }}
       />
       <div className="fixed inset-0 bg-background/20 z-[1]" />
