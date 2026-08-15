@@ -113,3 +113,39 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(45 100% 60% / 0.5); }
+  50%       { box-shadow: 0 0 0 12px hsl(45 100% 60% / 0); }
+}
+
+.animate-fade-in-up   { animation: fadeInUp 0.65s ease both; }
+.animate-fade-in      { animation: fadeIn   0.65s ease both; }
+.animate-scale-in     { animation: scaleIn  0.65s ease both; }
+.animate-cta-pulse    { animation: ctaPulse 2.2s ease-in-out infinite; }
+
+.section-anim {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.section-anim.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

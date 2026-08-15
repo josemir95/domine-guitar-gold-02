@@ -2,7 +2,55 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Check, Star, Users, Clock, Shield, Zap, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
+// Dispara quando o elemento entra na viewport (roda apenas uma vez)
+const useInView = (threshold = 0.12) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); } },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, inView };
+};
+
+// Conta de 0 até target com easing quando inView
+const useCounter = (target: number, inView: boolean, duration = 1400) => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    const start = Date.now();
+    const tick = () => {
+      const p = Math.min((Date.now() - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setCount(Math.floor(eased * target));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [inView, target, duration]);
+  return count;
+};
+
+// Wrapper que anima a seção ao entrar na viewport
+const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
+  const { ref, inView } = useInView();
+  return (
+    <div
+      ref={ref}
+      className={`section-anim${inView ? ' visible' : ''} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
 import heroGuitar from "@/assets/hero-guitar.jpg";
 import bonusChecklist from "@/assets/bonus-checklist.jpg";
 import bonusPentatonic from "@/assets/bonus-pentatonic.jpg";
@@ -31,6 +79,12 @@ const GuitarLandingPage = () => {
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [showExitPopup, setShowExitPopup] = useState(false);
   const [viewersCount, setViewersCount] = useState(47);
+  const [heroVisible, setHeroVisible] = useState(false);
+
+  // Stats counter
+  const { ref: statsRef, inView: statsInView } = useInView(0.3);
+  const alunos = useCounter(500, statsInView);
+  const avaliacao = useCounter(49, statsInView); // dividido por 10 no render
 
   const goToCheckout = () => window.open(CHECKOUT_URL, '_blank');
 
@@ -88,6 +142,12 @@ const GuitarLandingPage = () => {
       setViewersCount(p => Math.max(35, Math.min(72, p + (Math.random() > 0.5 ? 1 : -1))));
     }, 4000);
     return () => clearInterval(iv);
+  }, []);
+
+  // Hero entrance — pequeno delay para garantir que o CSS está pronto
+  useEffect(() => {
+    const t = setTimeout(() => setHeroVisible(true), 80);
+    return () => clearTimeout(t);
   }, []);
 
   const bonuses = [
@@ -224,7 +284,10 @@ const GuitarLandingPage = () => {
             <div className="space-y-6 md:space-y-8">
 
               {/* Mini social proof com avatares */}
-              <div className="flex items-center justify-center gap-3 flex-wrap">
+              <div
+                className={`flex items-center justify-center gap-3 flex-wrap transition-all duration-700 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                style={{ transitionDelay: '100ms' }}
+              >
                 <div className="flex -space-x-2">
                   {['CS', 'AB', 'RS', 'MO', 'FL'].map((initials, i) => (
                     <div key={i} className={`w-8 h-8 rounded-full ${AVATAR_COLORS[i]} flex items-center justify-center text-xs font-bold text-white border-2 border-background`}>
@@ -237,7 +300,10 @@ const GuitarLandingPage = () => {
                 </span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg">
+              <h2
+                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg transition-all duration-700 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{ transitionDelay: '250ms' }}
+              >
                 <span className="bg-gradient-gold bg-clip-text text-transparent">
                   Domine a Guitarra do Zero
                 </span>
@@ -247,22 +313,31 @@ const GuitarLandingPage = () => {
                 </span>
               </h2>
 
-              <p className="text-lg md:text-xl text-white/90 px-2 drop-shadow-md font-medium">
+              <p
+                className={`text-lg md:text-xl text-white/90 px-2 drop-shadow-md font-medium transition-all duration-700 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                style={{ transitionDelay: '420ms' }}
+              >
                 O método que já transformou mais de <strong>500 alunos</strong> — do zero à performance profissional — com <strong>apenas 20 minutos por dia</strong>, sem precisar saber ler partitura.
               </p>
 
               {/* Live viewers */}
-              <div className="flex items-center justify-center gap-2">
+              <div
+                className={`flex items-center justify-center gap-2 transition-all duration-700 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                style={{ transitionDelay: '550ms' }}
+              >
                 <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                 <span className="text-sm text-white/70">{viewersCount} pessoas estão vendo essa página agora</span>
               </div>
 
-              <div className="flex flex-col items-center gap-3">
+              <div
+                className={`flex flex-col items-center gap-3 transition-all duration-700 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                style={{ transitionDelay: '680ms' }}
+              >
                 <Button
                   variant="hero"
                   size="lg"
                   onClick={goToCheckout}
-                  className="text-lg md:text-xl py-4 md:py-6 px-6 md:px-8 w-full max-w-md transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-gold-intense"
+                  className="text-lg md:text-xl py-4 md:py-6 px-6 md:px-8 w-full max-w-md transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-gold-intense animate-cta-pulse"
                 >
                   🎸 Quero Dominar a Guitarra Agora!
                 </Button>
@@ -273,15 +348,19 @@ const GuitarLandingPage = () => {
                 </div>
               </div>
 
-              {/* Stats */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-10 pt-4">
+              {/* Stats com contador animado */}
+              <div
+                ref={statsRef}
+                className={`flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-10 pt-4 transition-all duration-700 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                style={{ transitionDelay: '820ms' }}
+              >
                 <div className="text-center">
-                  <p className="text-2xl md:text-3xl font-bold text-primary drop-shadow">500+</p>
+                  <p className="text-2xl md:text-3xl font-bold text-primary drop-shadow">{statsInView ? `${alunos}+` : '0+'}</p>
                   <p className="text-xs md:text-sm text-white/80 drop-shadow">Alunos Transformados</p>
                 </div>
                 <div className="hidden sm:block w-px h-10 bg-white/20" />
                 <div className="text-center">
-                  <p className="text-2xl md:text-3xl font-bold text-primary drop-shadow">4.9★</p>
+                  <p className="text-2xl md:text-3xl font-bold text-primary drop-shadow">{statsInView ? `${(avaliacao / 10).toFixed(1)}★` : '0★'}</p>
                   <p className="text-xs md:text-sm text-white/80 drop-shadow">Avaliação Média</p>
                 </div>
                 <div className="hidden sm:block w-px h-10 bg-white/20" />
@@ -302,7 +381,7 @@ const GuitarLandingPage = () => {
         {/* ===== PROBLEMA ===== */}
         <section className="bg-secondary py-8 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
+            <AnimatedSection className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-lg px-2">
                 Você se Identifica Com Alguma Dessas Situações?
               </h3>
@@ -337,14 +416,14 @@ const GuitarLandingPage = () => {
                   </span>
                 </p>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
         {/* ===== PARA QUEM É (NOVO) ===== */}
         <section className="py-8 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
+            <AnimatedSection className="max-w-4xl mx-auto">
               <div className="text-center space-y-3 md:space-y-4 mb-8 md:mb-12">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold px-2">
                   Este Método é Para Você Se...{" "}
@@ -370,14 +449,14 @@ const GuitarLandingPage = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
         {/* ===== SOLUÇÃO ===== */}
         <section className="bg-secondary py-8 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
+            <AnimatedSection className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground px-2">
                 <span className="bg-gradient-gold bg-clip-text text-transparent">A Solução Definitiva</span>
               </h3>
@@ -420,14 +499,14 @@ const GuitarLandingPage = () => {
                   </span>
                 </p>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
         {/* ===== INSTRUTOR ===== */}
         <section className="bg-secondary py-8 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
+            <AnimatedSection className="max-w-4xl mx-auto">
               <div className="text-center mb-8 md:mb-12">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold px-2">
                   Quem Vai Te{" "}
@@ -483,14 +562,14 @@ const GuitarLandingPage = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
         {/* ===== BÔNUS ===== */}
         <section className="py-8 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
+            <AnimatedSection className="max-w-4xl mx-auto space-y-6 md:space-y-8">
               <div className="text-center space-y-3 md:space-y-4">
                 <p className="text-sm font-semibold text-primary uppercase tracking-wider">Compre hoje e ganhe</p>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground px-2">
@@ -551,7 +630,7 @@ const GuitarLandingPage = () => {
                   Acesso imediato • Garantia de 7 dias • Pagamento seguro
                 </p>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -594,7 +673,7 @@ const GuitarLandingPage = () => {
         {/* ===== DEPOIMENTOS (MELHORADOS) ===== */}
         <section className="py-8 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto space-y-6 md:space-y-8">
+            <AnimatedSection className="max-w-6xl mx-auto space-y-6 md:space-y-8">
               <div className="text-center space-y-3 md:space-y-4">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground px-2">
                   O Que Nossos{" "}
@@ -634,7 +713,7 @@ const GuitarLandingPage = () => {
                   </Card>
                 ))}
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -688,7 +767,7 @@ const GuitarLandingPage = () => {
         {/* ===== GARANTIA ===== */}
         <section className="bg-secondary py-8 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
+            <AnimatedSection className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground px-2">
                 <span className="bg-gradient-gold bg-clip-text text-transparent">
                   Garantia Incondicional de 7 Dias
@@ -710,7 +789,7 @@ const GuitarLandingPage = () => {
                   <span className="flex items-center gap-1"><Check className="w-4 h-4 text-green-400" /> 100% do dinheiro de volta</span>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -819,7 +898,7 @@ const GuitarLandingPage = () => {
         {/* ===== FAQ ===== */}
         <section className="bg-secondary py-8 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
+            <AnimatedSection className="max-w-4xl mx-auto space-y-6 md:space-y-8">
               <div className="text-center space-y-3 md:space-y-4">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground px-2">
                   <span className="bg-gradient-gold bg-clip-text text-transparent">Perguntas Frequentes</span>
@@ -855,7 +934,7 @@ const GuitarLandingPage = () => {
                   🎸 Sim, Quero Transformar Minha Música!
                 </Button>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
