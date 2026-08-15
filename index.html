@@ -19,7 +19,14 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '2204437266644303');
     fbq('track', 'PageView');
-    </script>
+    fbq('track', 'ViewContent', {
+      content_name: 'Domine a Guitarra',
+      content_ids: ['domine-guitarra'],
+      content_type: 'product',
+      value: 19.90,
+      currency: 'BRL'
+    });
+</script>
     <!-- End Meta Pixel Code -->
 
     <script>

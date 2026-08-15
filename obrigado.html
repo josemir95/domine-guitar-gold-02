@@ -4,6 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Obrigado pela sua compra!</title>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2204437266644303');
+  fbq('track', 'PageView');
+  fbq('track', 'Purchase', {
+    value: 19.90,
+    currency: 'BRL',
+    content_name: 'Domine a Guitarra',
+    content_ids: ['domine-guitarra'],
+    content_type: 'product'
+  });
+  </script>
+  <!-- End Meta Pixel Code -->
   <style>
     body {
       background-color: #f7f7f7;
@@ -29,6 +51,11 @@
   </style>
 </head>
 <body>
+  <!-- Meta Pixel noscript -->
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2204437266644303&ev=Purchase&noscript=1"
+  /></noscript>
+
   <div class="container">
     <h1>✅ Compra Confirmada!</h1>
     <p>Obrigado por adquirir o <strong>Domine a Guitarra!</strong></p>
