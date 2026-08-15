@@ -62,12 +62,14 @@
     <p>Você receberá um e-mail com os dados de acesso em breve.</p>
   </div>
 
-  <!-- SCRIPT DA UTMIFY AQUI -->
+  <!-- UTMify Pixel -->
   <script>
-    (function(u,t,m,f,y){
-      f=u.createElement('script');f.async=1;f.src='https://cdn.utmify.com.br/script.js';
-      y=u.getElementsByTagName('script')[0];y.parentNode.insertBefore(f,y);
-    })(document,window);
+    window.pixelId = "688ac08d1d468b7db2348410";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
   </script>
 
 </body>
