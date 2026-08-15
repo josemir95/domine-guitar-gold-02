@@ -38,6 +38,9 @@ const useCounter = (target: number, inView: boolean, duration = 1400) => {
   return count;
 };
 
+// Divisor visual estilo traste de guitarra — elemento signature
+const FretDivider = () => <div className="fret-divider w-full my-0" aria-hidden="true" />;
+
 // Wrapper que anima a seção ao entrar na viewport
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
   const { ref, inView } = useInView();
@@ -420,6 +423,8 @@ const GuitarLandingPage = () => {
           </div>
         </section>
 
+        <FretDivider />
+
         {/* ===== PARA QUEM É (NOVO) ===== */}
         <section className="py-8 md:py-16">
           <div className="container mx-auto px-4">
@@ -566,6 +571,8 @@ const GuitarLandingPage = () => {
           </div>
         </section>
 
+        <FretDivider />
+
         {/* ===== BÔNUS ===== */}
         <section className="py-8 md:py-16">
           <div className="container mx-auto px-4">
@@ -669,6 +676,8 @@ const GuitarLandingPage = () => {
             </div>
           </div>
         </section>
+
+        <FretDivider />
 
         {/* ===== DEPOIMENTOS (MELHORADOS) ===== */}
         <section className="py-8 md:py-16">
@@ -792,6 +801,8 @@ const GuitarLandingPage = () => {
             </AnimatedSection>
           </div>
         </section>
+
+        <FretDivider />
 
         {/* ===== CHECKOUT (MELHORADO) ===== */}
         <section id="checkout" className="py-8 md:py-16">
