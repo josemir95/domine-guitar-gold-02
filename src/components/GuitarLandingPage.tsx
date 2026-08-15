@@ -192,10 +192,12 @@ const GuitarLandingPage = () => {
 
       {/* Background Guitar Image */}
       <div
-        className="fixed left-0 top-0 w-full md:w-1/2 h-full bg-cover bg-center md:bg-right bg-no-repeat opacity-20 md:opacity-25 z-0"
-        style={{ backgroundImage: `url(${heroGuitar})` }}
+        className="absolute md:fixed left-0 top-0 w-full md:w-1/2 h-full md:h-full bg-cover bg-top md:bg-right bg-no-repeat opacity-35 md:opacity-25 z-0 pointer-events-none"
+        style={{ backgroundImage: `url(${heroGuitar})`, minHeight: '100vh' }}
       />
-      <div className="fixed inset-0 bg-background/30 z-5" />
+      {/* Gradient overlay — fades image into dark background for readability */}
+      <div className="absolute md:fixed inset-0 bg-gradient-to-b from-background/10 via-background/60 to-background z-[1] pointer-events-none" />
+      <div className="absolute md:fixed inset-0 bg-background/20 z-[2] pointer-events-none md:hidden" />
 
       <div className="relative z-20">
 
