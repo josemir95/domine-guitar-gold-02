@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Check, Star, Users, Clock, Shield, Zap, X } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 // Dispara quando o elemento entra na viewport (roda apenas uma vez)
 const useInView = (threshold = 0.12) => {
@@ -40,6 +40,19 @@ const useCounter = (target: number, inView: boolean, duration = 1400) => {
 
 // Divisor visual estilo traste de guitarra — elemento signature
 const FretDivider = () => <div className="fret-divider w-full my-0" aria-hidden="true" />;
+
+// Flip animado por dígito — reanima via key quando o valor muda
+const FlipDigit = ({ value }: { value: string }) => {
+  const [animKey, setAnimKey] = useState(0);
+  const prev = useRef(value);
+  useEffect(() => {
+    if (value !== prev.current) {
+      prev.current = value;
+      setAnimKey(k => k + 1);
+    }
+  }, [value]);
+  return <span key={animKey} className="digit-flip tabular-nums">{value}</span>;
+};
 
 // Wrapper que anima a seção ao entrar na viewport
 const AnimatedSection = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
@@ -86,6 +99,10 @@ const GuitarLandingPage = () => {
 
   // Stats counter
   const { ref: statsRef, inView: statsInView } = useInView(0.3);
+
+  // Stagger refs para cards
+  const { ref: bonusGridRef, inView: bonusGridInView } = useInView(0.05);
+  const { ref: testimonialGridRef, inView: testimonialGridInView } = useInView(0.05);
   const alunos = useCounter(500, statsInView);
   const avaliacao = useCounter(49, statsInView); // dividido por 10 no render
 
@@ -226,32 +243,30 @@ const GuitarLandingPage = () => {
       )}
 
       {/* ===== STICKY BOTTOM CTA BAR ===== */}
-      {showStickyBar && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a0a] border-t-2 border-primary shadow-gold-intense">
-          <div className="container mx-auto px-4 py-2 md:py-3">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
-              <div className="flex items-center gap-4">
-                <div>
-                  <p className="text-xs text-muted-foreground line-through leading-none">R$ 299</p>
-                  <p className="text-lg md:text-xl font-bold bg-gradient-gold bg-clip-text text-transparent leading-tight">R$ 19,90</p>
-                </div>
-                <div className="hidden sm:flex items-center gap-1 text-xs text-white/60 border-l border-border pl-4">
-                  <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                  <span>{viewersCount} pessoas vendo agora</span>
-                </div>
+      <div className={`fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a0a] border-t-2 border-primary shadow-gold-intense transition-transform duration-300 ease-out ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}>
+        <div className="container mx-auto px-4 py-2 md:py-3">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div className="flex items-center gap-4">
+              <div>
+                <p className="text-xs text-muted-foreground line-through leading-none">R$ 299</p>
+                <p className="text-lg md:text-xl font-bold bg-gradient-gold bg-clip-text text-transparent leading-tight">R$ 19,90</p>
               </div>
-              <Button
-                variant="hero"
-                size="sm"
-                className="text-sm md:text-base py-2 md:py-3 px-4 md:px-6 transform hover:scale-105 transition-all w-full sm:w-auto"
-                onClick={goToCheckout}
-              >
-                🎸 Quero Começar Agora →
-              </Button>
+              <div className="hidden sm:flex items-center gap-1 text-xs text-white/60 border-l border-border pl-4">
+                <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                <span>{viewersCount} pessoas vendo agora</span>
+              </div>
             </div>
+            <Button
+              variant="hero"
+              size="sm"
+              className="text-sm md:text-base py-2 md:py-3 px-4 md:px-6 transform hover:scale-105 transition-all w-full sm:w-auto"
+              onClick={goToCheckout}
+            >
+              🎸 Quero Começar Agora →
+            </Button>
           </div>
         </div>
-      )}
+      </div>
 
       {/* Background Guitar Image */}
       <div
@@ -586,9 +601,10 @@ const GuitarLandingPage = () => {
                   Além do método principal, você recebe <strong>5 bônus</strong> que irão acelerar ainda mais seus resultados — totalmente grátis!
                 </p>
               </div>
-              <div className="grid gap-4 md:gap-6">
+              <div ref={bonusGridRef} className="grid gap-4 md:gap-6">
                 {bonuses.map((bonus, index) => (
-                  <Card key={index} className="bg-card border-border hover:border-primary/50 transition-colors">
+                  <div key={index} style={{ opacity: bonusGridInView ? 1 : 0, transform: bonusGridInView ? 'translateY(0)' : 'translateY(24px)', transition: `opacity 0.5s ease ${index * 100}ms, transform 0.5s ease ${index * 100}ms` }}>
+                  <Card className="bg-card border-border hover:border-primary/50 transition-colors">
                     <CardContent className="p-4 md:p-6">
                       <div className="flex flex-col sm:flex-row items-start gap-3 md:gap-4">
                         <div className="flex-shrink-0 w-full sm:w-auto flex justify-center sm:justify-start">
@@ -609,6 +625,7 @@ const GuitarLandingPage = () => {
                       </div>
                     </CardContent>
                   </Card>
+                  </div>
                 ))}
               </div>
               <div className="text-center mt-8 md:mt-12 p-4 md:p-8 bg-gradient-dark rounded-lg border border-primary shadow-gold-intense mx-2">
@@ -653,8 +670,10 @@ const GuitarLandingPage = () => {
                   { value: pad(timeLeft.seconds), label: 'Segundos' },
                 ].map((unit, i) => (
                   <div key={i} className="flex items-center gap-2 md:gap-4">
-                    <div className="bg-black/60 border-2 border-red-500 rounded-lg p-3 md:p-4 min-w-[58px] md:min-w-[80px] text-center">
-                      <p className="text-2xl md:text-4xl font-mono font-bold text-red-400">{unit.value}</p>
+                    <div className="bg-black/60 border-2 border-red-500 rounded-lg p-3 md:p-4 min-w-[58px] md:min-w-[80px] text-center overflow-hidden">
+                      <p className="text-2xl md:text-4xl font-mono font-bold text-red-400">
+                        {unit.value.split('').map((char, ci) => <FlipDigit key={ci} value={char} />)}
+                      </p>
                       <p className="text-xs text-white/60 mt-1">{unit.label}</p>
                     </div>
                     {i < 2 && <span className="text-2xl md:text-3xl font-bold text-red-400">:</span>}
@@ -696,9 +715,10 @@ const GuitarLandingPage = () => {
                   <span className="ml-2 text-white font-semibold text-sm md:text-base">4.9/5 — Baseado em 500+ avaliações</span>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              <div ref={testimonialGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {testimonials.map((t, i) => (
-                  <Card key={i} className="bg-card border-border hover:border-primary/40 transition-colors">
+                  <div key={i} style={{ opacity: testimonialGridInView ? 1 : 0, transform: testimonialGridInView ? 'translateY(0)' : 'translateY(24px)', transition: `opacity 0.5s ease ${i * 90}ms, transform 0.5s ease ${i * 90}ms` }}>
+                  <Card className="bg-card border-border hover:border-primary/40 transition-colors">
                     <CardContent className="p-4 md:p-6 space-y-3 md:space-y-4">
                       <div className="flex items-center gap-3">
                         <div className={`w-10 h-10 rounded-full ${AVATAR_COLORS[i % AVATAR_COLORS.length]} flex items-center justify-center text-sm font-bold text-white flex-shrink-0`}>
@@ -720,6 +740,7 @@ const GuitarLandingPage = () => {
                       </div>
                     </CardContent>
                   </Card>
+                  </div>
                 ))}
               </div>
             </AnimatedSection>
